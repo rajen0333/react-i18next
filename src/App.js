@@ -1,26 +1,24 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-
-function App() {
+import { withTranslation, Trans } from 'react-i18next';
+class App extends React.Component {
+  render()
+    {
+        const { i18n } = this.props;
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <h1 className="App-title">
+                { this.props.t('welcome.title', { framework: "react-i18next" }) }
+            </h1>
+           
+            { this.props.t('welcome.intro') }
+            <br/>
+            <button onClick={() => i18n.changeLanguage('de')}>de</button>
+                <button onClick={() => i18n.changeLanguage('en')}>en</button>
     </div>
   );
+    }
 }
 
-export default App;
+export default withTranslation('common')(App);
